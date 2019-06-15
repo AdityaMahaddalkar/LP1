@@ -1,5 +1,5 @@
 
-install.packages(c("ggplot2", "readr", "gridExtra", "grid", "plyr"))
+# install.packages(c("ggplot2", "readr", "gridExtra", "grid", "plyr"))
 library(ggplot2)
 library(readr)
 library(gridExtra)
@@ -60,3 +60,11 @@ grid.arrange(HisSl + ggtitle(""),
              top = textGrob("Iris Frequency Histogram", 
                             gp=gpar(fontsize=15))
 )
+
+#boxplots
+Box1 <- boxplot(iris$SepalLengthCm ~ iris$Species)
+Box2 <- boxplot(iris$SepalWidthCm ~ iris$Species)
+Box3 <- boxplot(iris$PetalLengthCm ~ iris$Species)
+Box4 <- boxplot(iris$PetalWidthCm ~ iris$Species)
+
+
