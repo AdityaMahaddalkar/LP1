@@ -1,0 +1,45 @@
+<aiml version="1.0.1" encoding="UTF-8">
+    <category>
+        <pattern>^hello^</pattern>
+        <template>
+            Well, hello!
+        </template>
+    </category>
+    <category>
+        <pattern>what are you</pattern>
+        <template>
+            I'm a bot.
+        </template>
+    </category>
+    <category>
+        <pattern>^INVESTMENT OPTIONS^</pattern>
+        <template>
+            Direct equity. ...
+            Equity mutual funds. ...
+            Debt mutual funds. ...
+            National Pension System (NPS) ...
+            Public Provident Fund (PPF) ...
+            Bank fixed deposit (FD) ...
+            Senior Citizens' Saving Scheme (SCSS) ...
+            RBI Taxable Bonds.
+        </template>
+    </category>
+    <category>
+        <pattern>^ DIRECT EQUITIES ^</pattern>
+        <template>
+            Investing in stocks may not be everyone's cup of tea as it's a volatile asset class and there is no guarantee of returns. Further, not only is it difficult to pick the right stock, timing your entry and exit is also not easy. The only silver lining is that over long periods, equity has been able to deliver higher than inflation-adjusted returns compared to all other asset classes.
+        </template>
+    </category>
+    <category>
+        <pattern>^ EQUITY MUTUAL FUNDS ^</pattern>
+        <template>
+            Equity mutual funds predominantly invest in equity stocks. As per current Securities and Exchange Board of India (Sebi) Mutual Fund Regulations, an equity mutual fund scheme must invest at least 65 percent of its assets in equities and equity-related instruments. An equity fund can be actively managed or passively managed.
+        </template>
+    </category>
+    <category>
+        <pattern>^ DEBT MUTUAL FUNDS ^</pattern>
+        <template>
+            Debt funds are ideal for investors who want steady returns. They are are less volatile and, hence, less risky compared to equity funds. Debt mutual funds primarily invest in fixed-interest generating securities like corporate bonds, government securities, treasury bills, commercial paper and other money market instruments. Currently, the 1-, 3-, 5-year market return is around 6.5 percent, 8 percent, and 7.5 percent, respectively.
+        </template>
+    </category>
+</aiml>
