@@ -59,7 +59,7 @@ pairs = [
 ]
 
 def chatty():
-    print("Welcome to LA. Lucifer will be our guide in the investments")
+    print("Welcome to LA. Lucifer will be your guide in the investments")
 
     chat = Chat(pairs, reflections)
     chat.converse()
