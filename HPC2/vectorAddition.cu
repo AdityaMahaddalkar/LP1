@@ -9,7 +9,7 @@ __global__ void VecAdd(float *A, float *B, float *C){
 
 int main(){
     float *A, *B, *C, *devA, *devB, *devC;
-    int n = 1024*1024*32;
+    int n = 100000000;
     A = (float*)malloc(n * sizeof(float));
     B = (float*)malloc(n * sizeof(float));
     C = (float*)malloc(n * sizeof(float));
