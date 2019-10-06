@@ -4,8 +4,8 @@
 using namespace std;
 using namespace std::chrono;
 
-__global__ void reduce(int *g_idata, int *g_odata){
-    extern __shared__ int sdata[];
+__global__ void reduce(float *g_idata, float *g_odata){
+    extern __shared__ float sdata[];
 
     //each thread loads one element from global to shared mem
     unsigned int tid = threadIdx.x;
@@ -25,7 +25,7 @@ __global__ void reduce(int *g_idata, int *g_odata){
     if (tid == 0) g_odata[blockIdx.x] = sdata[0];
 }
 
-void sum_CPU(int *host_input, int *host_output, unsigned int size){
+void sum_CPU(float *host_input, float *host_output, unsigned int size){
     host_output[0] = 0;
     auto start = high_resolution_clock::now();
     for(int i = 0;i < size;i ++){
@@ -49,42 +49,42 @@ int main(){
     
     int maxThreads = 1024;
     
-    int *host_input, *host_output, *device_input, *device_output;
-    int *cpu_input, *cpu_output;
+    float *host_input, *host_output, *device_input, *device_output;
+    float *cpu_input, *cpu_output;
 
-    int n = 2 << 21;
-    size_t size = n * sizeof(int);
+    int n = 2 << 12;
+    size_t size = n * sizeof(float);
 
     //CPU sum
-    cpu_input = (int *)malloc(size);
-    cpu_output = (int *)malloc(sizeof(int));
+    cpu_input = (float *)malloc(size);
+    cpu_output = (float *)malloc(sizeof(float));
     cpu_output[0] = 0;
 
     for(unsigned int i = 0;i < n;i ++){
-        cpu_input[i] = 1;
+        cpu_input[i] = 1.0f;
     }
 
     sum_CPU(cpu_input, cpu_output, n);
 
-    host_input = (int *)malloc(size);
+    host_input = (float *)malloc(size);
     for(int i = 0;i < n;i ++){
         host_input[i] = 1;
     }
     
     int blocks = n / maxThreads;
-    host_output = (int *)malloc(blocks * sizeof(int));
+    host_output = (float *)malloc(blocks * sizeof(float));
 
     const dim3 block_size(maxThreads, 1, 1);
     const dim3 grid_size(blocks, 1, 1);
     
     cudaMalloc(&device_input, size);
-    cudaMalloc(&device_output, blocks * sizeof(int));
+    cudaMalloc(&device_output, blocks * sizeof(float));
 
     cudaMemcpy(device_input, host_input, size, cudaMemcpyHostToDevice);
 
-    reduce<<<grid_size, block_size, maxThreads * sizeof(int)>>>(device_input, device_output);
+    reduce<<<grid_size, block_size, maxThreads * sizeof(float)>>>(device_input, device_output);
 
-    cudaMemcpy(host_output, device_output, blocks * sizeof(int), cudaMemcpyDeviceToHost);
+    cudaMemcpy(host_output, device_output, blocks * sizeof(float), cudaMemcpyDeviceToHost);
 
     for(int i = 1;i < blocks; i++){
         host_output[0] += host_output[i];

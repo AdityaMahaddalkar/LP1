@@ -42,7 +42,7 @@ int main(){
     float *cpu_input, *cpu_output;
     float *device_input, *device_output, *transfer_output;
 
-    unsigned int n = 2 << 21;
+    unsigned int n = 2 << 29;
     size_t size = n * sizeof(float);
     
     unsigned int numThreadsPerBlock = 1024;
