@@ -16,26 +16,13 @@ __global__ void revisedArraySum(float *array, float *sum){
 
     __shared__ float partialSum[256];
     int t = threadIdx.x;
-    for(int stride = 1;stride < blockDim.x; stride += 2){
+    for(int stride = 1;stride < blockDim.x; stride *= 2){
         __syncthreads();
         if(t % (2 * stride) == 0){
             partialSum[t] += partialSum[t + stride];
         }
     }
-    printf("Sum from GPU: %f", partialSum[0]);
-}
-
-__global__ void sharedMemoryTemp(float *input){
-    __shared__ float data[256];
-
-    if (threadIdx.x == 0 && blockIdx.x == 0)
-    {
-        printf("Block Number: %d\n", blockIdx.x);
-        for (int i = 0; i < 256; ++i)
-        {
-            printf("DATA[%d] = %f\n", i, data[i]);
-        }
-    }
+    sum[0] = partialSum[0];
 }
 
 void findSum(float *array, float *sum){
@@ -74,7 +61,6 @@ int main(){
 
     auto start = high_resolution_clock::now();
     revisedArraySum<<<numBlocks, threadsPerBlock>>>(deviceInput, sumGPU);
-    cudaDeviceSynchronize();
     auto stop = high_resolution_clock::now();
     auto time_req = duration_cast<microseconds>(stop - start).count();
 
