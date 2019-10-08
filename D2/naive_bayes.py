@@ -39,7 +39,7 @@ x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size = 0.2, rando
 gnb = GaussianNB()
 y_pred = gnb.fit(x_train, y_train).predict(x_test)
 
-print("Number of mislabeled points out of total %d points : %d"
+print("Number of mislabeled points out of total %d points : %d")
 #      % (x_test.shape[0], (y_test != y_pred).sum()))
 print("Accuracy : %.3f" % ((y_test == y_pred).sum() / x_test.shape[0] * 100))
 
