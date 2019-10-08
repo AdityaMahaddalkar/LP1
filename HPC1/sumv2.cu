@@ -26,15 +26,15 @@ __global__ void reduce(float *g_idata, float *g_odata){
 }
 
 void sum_CPU(float *host_input, float *host_output, unsigned int size){
-    host_output[0] = 0;
+    double result = 0.0f;
     auto start = high_resolution_clock::now();
     for(int i = 0;i < size;i ++){
-        host_output[0] += host_input[i];
+        result += host_input[i];
     }
     auto stop = high_resolution_clock::now();
     auto time_req = duration_cast<microseconds>(stop - start).count();
     cout << endl << "Time required for CPU : " << time_req << " microseconds "<< endl;
-    cout << endl << " Sum from CPU : " << host_output[0] << endl;
+    cout << endl << " Sum from CPU : " << result << endl;
 }
 
 void compute_sum_cpu(int *cpu_input, int *cpu_output, unsigned int n){
@@ -50,15 +50,16 @@ int main(){
     int maxThreads = 1024;
     
     float *host_input, *host_output, *device_input, *device_output;
-    float *cpu_input, *cpu_output;
+    float *cpu_input;
+    float *cpu_output;
 
-    int n = 2 << 12;
+    int n = 2 << 29;
     size_t size = n * sizeof(float);
 
     //CPU sum
-    cpu_input = (float *)malloc(size);
+    cpu_input = (float *)malloc(sizeof(float));
     cpu_output = (float *)malloc(sizeof(float));
-    cpu_output[0] = 0;
+    cpu_output[0] = 0.0f;
 
     for(unsigned int i = 0;i < n;i ++){
         cpu_input[i] = 1.0f;
