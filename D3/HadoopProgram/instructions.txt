@@ -1,0 +1,10 @@
+
+### For instructions to work, ensure all the files are in home directory
+
+1. Copy the count.java and input.txt files in the home directory
+2. cd to home directory
+3. $ javac -classpath path/to/hadoop-core-1.2.x.jar:path/to/commons-cli-1.2.x.jar count.java
+4. $ jar -cvf myCounter.jar *.class
+5. $ hadoop fs -put input.txt input.txt
+6. $ hadoop jar myCounter.jar count input.txt MRDir1
+7. $ hadoop fs -cat MRDir1/part-r-00000 
