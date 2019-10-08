@@ -3,7 +3,7 @@
 using namespace std;
 using namespace std::chrono;
 #define BLOCKSIZE 16
-#define N 1000
+#define N 1024
 
 __global__ void gpu_mat_vec_multiply(double *device_mat,
                                     double *device_vec,

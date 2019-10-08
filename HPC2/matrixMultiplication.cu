@@ -5,7 +5,7 @@
 using namespace std;
 using namespace std::chrono;
 #define BLOCK_SIZE 16
-#define N 100
+#define N 1024
 
 __global__ void gpu_matrix_mul(int *a, int *b, int *c){
     
